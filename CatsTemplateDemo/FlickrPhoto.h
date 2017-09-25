@@ -6,7 +6,7 @@
 //  Copyright © 2017 Occasionally Cogent. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface FlickrPhoto : NSObject
 

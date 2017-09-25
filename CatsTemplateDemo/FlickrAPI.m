@@ -36,7 +36,7 @@
 
          NSError *err = nil;
          NSDictionary* result = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
-         if (err != nil) {
+         if (err) {
              NSLog(@"Something went wrong parsing JSON: %@", err.localizedDescription);
              abort();
          }
@@ -58,7 +58,7 @@
      dataTaskWithURL:photo.url
      completionHandler:^(NSData * data, NSURLResponse *  response, NSError *  error) {
          // this is where we get the results
-         if (error != nil) {
+         if (error) {
              NSLog(@"error in url session: %@", error.localizedDescription);
              abort(); // TODO: display an alert or something
          }

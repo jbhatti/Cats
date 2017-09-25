@@ -15,6 +15,7 @@
 		1A04B0EE1F798BD50088945E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A04B0EC1F798BD50088945E /* LaunchScreen.storyboard */; };
 		1A04B0F81F798D850088945E /* FlickrAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A04B0F71F798D850088945E /* FlickrAPI.m */; };
 		1A04B0FB1F798E2A0088945E /* FlickrPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A04B0FA1F798E2A0088945E /* FlickrPhoto.m */; };
+		88CE849E1F79AE1A002EF222 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CE849D1F79AE1A002EF222 /* PhotoCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,11 +29,13 @@
 		1A04B0EA1F798BD50088945E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A04B0ED1F798BD50088945E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A04B0EF1F798BD50088945E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1A04B0F51F798BEE0088945E /* Secrets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Secrets.h; sourceTree = "<group>"; };
 		1A04B0F61F798D850088945E /* FlickrAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAPI.h; sourceTree = "<group>"; };
 		1A04B0F71F798D850088945E /* FlickrAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrAPI.m; sourceTree = "<group>"; };
 		1A04B0F91F798E2A0088945E /* FlickrPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhoto.h; sourceTree = "<group>"; };
 		1A04B0FA1F798E2A0088945E /* FlickrPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhoto.m; sourceTree = "<group>"; };
+		88CE849B1F799DB6002EF222 /* Secrets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Secrets.h; sourceTree = "<group>"; };
+		88CE849C1F79AE1A002EF222 /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		88CE849D1F79AE1A002EF222 /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,11 +77,13 @@
 				1A04B0F91F798E2A0088945E /* FlickrPhoto.h */,
 				1A04B0FA1F798E2A0088945E /* FlickrPhoto.m */,
 				1A04B0E71F798BD50088945E /* Main.storyboard */,
-				1A04B0F51F798BEE0088945E /* Secrets.h */,
 				1A04B0EA1F798BD50088945E /* Assets.xcassets */,
 				1A04B0EC1F798BD50088945E /* LaunchScreen.storyboard */,
 				1A04B0EF1F798BD50088945E /* Info.plist */,
 				1A04B0DE1F798BD50088945E /* Supporting Files */,
+				88CE849B1F799DB6002EF222 /* Secrets.h */,
+				88CE849C1F79AE1A002EF222 /* PhotoCollectionViewCell.h */,
+				88CE849D1F79AE1A002EF222 /* PhotoCollectionViewCell.m */,
 			);
 			path = CatsTemplateDemo;
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A04B0E61F798BD50088945E /* ViewController.m in Sources */,
+				88CE849E1F79AE1A002EF222 /* PhotoCollectionViewCell.m in Sources */,
 				1A04B0E31F798BD50088945E /* AppDelegate.m in Sources */,
 				1A04B0E01F798BD50088945E /* main.m in Sources */,
 				1A04B0FB1F798E2A0088945E /* FlickrPhoto.m in Sources */,
@@ -324,6 +330,7 @@
 				1A04B0F41F798BD50088945E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

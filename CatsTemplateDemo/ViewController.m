@@ -8,10 +8,14 @@
 
 #import "ViewController.h"
 #import "FlickrAPI.h"
+#import "PhotoCollectionViewCell.h"
 
-@interface ViewController ()
+@interface ViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic,strong) NSArray *catPhotos;
-@property (nonatomic,weak) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
 @end
 
 @implementation ViewController
@@ -27,26 +31,17 @@
     // (another/older way would be to make this class the delegate of the api object
     // and have a delegate method that would get the results (but that would mean
     // we couldn't just use a class method, would actually need to alloc&init a FlickrAPI object
+    
     [FlickrAPI searchFor:@"cats" complete:^(NSArray<FlickrPhoto *> *results) {
         self.catPhotos = results;
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self.collectionView reloadData];
+        }];
+        
         NSLog(@"Loaded photo results");
-            }];
+    }];
     NSLog(@"View did load finished");
-
-    // this would go somewhere else, for after photos have loaded
-    FlickrPhoto *catPhoto = self.catPhotos.firstObject;
-    if (catPhoto.image) {
-        self.imageView.image = catPhoto.image;
-    } else {
-        [FlickrAPI
-         loadImageForPhoto:catPhoto
-         complete:^(UIImage *result) {
-             catPhoto.image = result;
-             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                 self.imageView.image = result;
-             }];
-         }];
-    }
 }
 
 
@@ -54,6 +49,20 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.catPhotos.count;
+}
+
+
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    PhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    [cell setFlickrPhoto:self.catPhotos[indexPath.row]];
+    return cell;
+}
+
+
 
 
 @end
