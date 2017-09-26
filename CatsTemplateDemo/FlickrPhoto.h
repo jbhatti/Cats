@@ -17,6 +17,7 @@
 @property (nonatomic,assign) NSInteger farm;
 @property (nonatomic,strong) NSString* title;
 @property (nonatomic,strong) UIImage* image;
+@property (nonatomic, strong) NSURL *imageUrl;
 
 - (instancetype)initWithInfo:(NSDictionary<NSString*,id>*)info;
 

@@ -36,42 +36,51 @@
     // we couldn't just use a class method, would actually need to alloc&init a FlickrAPI object
     
     
-    
-    [FlickrAPI searchForCats:^(NSArray<FlickrPhoto *> *results) {
+    [self networkRequest:@"dogs" complete:^(NSArray * results) {
         self.catPhotos = results;
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self.collectionView reloadData];
         }];
-        
-        NSLog(@"Loaded photo results");
     }];
-    NSLog(@"View did load finished");
+
+    
+    
+//    [FlickrAPI searchForCats:^(NSArray<FlickrPhoto *> *results) {
+//        self.catPhotos = results;
+//
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//            [self.collectionView reloadData];
+//        }];
+//
+//        NSLog(@"Loaded photo results");
+//    }];
+//    NSLog(@"View did load finished");
     
 }
 
 
 
-- (NSURL *)createURLWithTag:(NSString *)value
+- (NSURLComponents *)createURLWithTag:(NSString *)value
 {
     NSURLComponents *components = [NSURLComponents componentsWithString:kBaseURL];
     components.query = kQueryItems;
 
                                    
     NSMutableArray <NSURLQueryItem *>*queryItems = [components.queryItems mutableCopy];
-    NSURLQueryItem *tag = [NSURLQueryItem queryItemWithName:@"tag" value:value];
+    NSURLQueryItem *tag = [NSURLQueryItem queryItemWithName:@"tags" value:value];
     [queryItems addObject:tag];
     components.queryItems = [queryItems copy];
     
-    return components.URL;
+    return components;
 }
 
 
--(void)networkRequest {
+-(void)networkRequest:(NSString*)createURL complete:(void (^)(NSArray *))complete {
     //    NSURLRequest *urlRequest = [[NSURLRequest alloc]initWithURL:[self createNewUrl]];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-    NSURL *url = [self createURLWithTag:@"cats"];
+    NSURL *url = [self createURLWithTag:createURL].URL;
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request  completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
         // this is where we get the results
@@ -84,10 +93,29 @@
         if (((NSHTTPURLResponse*)response).statusCode >= 300) {
             NSLog(@"Unexpected http response: %@", response);
             abort(); // TODO: display an alert or something
-        }                
+        }
+        
+        NSError *err = nil;
+        NSDictionary* result = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+        if (err) {
+            NSLog(@"Something went wrong parsing JSON: %@", err.localizedDescription);
+            abort();
+        }
+        
+        NSMutableArray<FlickrPhoto*> *catPhotos = [@[] mutableCopy];
+        for (NSDictionary *photoInfo in result[@"photos"][@"photo"]) {
+            [catPhotos addObject:[[FlickrPhoto alloc] initWithInfo:photoInfo]];
+        }
+        complete(catPhotos);
+        
+        
     }];
     
     [dataTask resume];
+}
+
+- (NSURL *)createURLWithGeoLocation:(NSString *)value {
+    return nil;
 }
 
 

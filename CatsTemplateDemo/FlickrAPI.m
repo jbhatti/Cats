@@ -7,6 +7,7 @@
 //
 
 #import "FlickrAPI.h"
+#import "Constants.h"
 //#import "Secrets.h" // Create this file if you've cloned this repo
 
 @implementation FlickrAPI
@@ -45,10 +46,12 @@
              [catPhotos addObject:[[FlickrPhoto alloc] initWithInfo:photoInfo]];
          }
          complete(catPhotos);
+         NSLog(@"%@", catPhotos);
      }];
 
     [task resume];
 }
+
 
 + (void)loadImageForPhoto:(FlickrPhoto *)photo complete:(void (^)(UIImage *))complete
 {
@@ -73,5 +76,34 @@
      }];
     [task resume];
 }
+
+
+
+
+
+
+
+- (NSURL *)createURLWithTag:(NSString *)value
+{
+    NSURLComponents *components = [NSURLComponents componentsWithString:kBaseURL];
+    components.query = kQueryItems;
+    
+    
+    NSMutableArray <NSURLQueryItem *>*queryItems = [components.queryItems mutableCopy];
+    NSURLQueryItem *tag = [NSURLQueryItem queryItemWithName:@"tag" value:value];
+    [queryItems addObject:tag];
+    components.queryItems = [queryItems copy];
+    
+    return components.URL;
+}
+
+
+
+
+
+
+
+
+
 
 @end
