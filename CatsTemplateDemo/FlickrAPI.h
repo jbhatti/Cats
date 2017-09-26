@@ -12,8 +12,7 @@
 @interface FlickrAPI : NSObject
 
 // + (NSArray*)searchFor:(NSString*)query;
-+ (void)searchFor:(NSString*)query
-         complete:(void (^)(NSArray<FlickrPhoto*>* results))complete;
++ (void)searchForCats:(void (^)(NSArray<FlickrPhoto *> *))complete;
 
 // + (UIImage*)loadImageForPhoto:(FlickrPhoto*)photo;
 + (void)loadImageForPhoto:(FlickrPhoto*)photo

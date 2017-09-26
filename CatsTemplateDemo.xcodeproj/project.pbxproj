@@ -36,6 +36,7 @@
 		88CE849B1F799DB6002EF222 /* Secrets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Secrets.h; sourceTree = "<group>"; };
 		88CE849C1F79AE1A002EF222 /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		88CE849D1F79AE1A002EF222 /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		88CE84D21F7ADBB5002EF222 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +85,7 @@
 				88CE849B1F799DB6002EF222 /* Secrets.h */,
 				88CE849C1F79AE1A002EF222 /* PhotoCollectionViewCell.h */,
 				88CE849D1F79AE1A002EF222 /* PhotoCollectionViewCell.m */,
+				88CE84D21F7ADBB5002EF222 /* Constants.h */,
 			);
 			path = CatsTemplateDemo;
 			sourceTree = "<group>";

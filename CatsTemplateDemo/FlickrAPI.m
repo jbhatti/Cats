@@ -11,11 +11,11 @@
 
 @implementation FlickrAPI
 
-+ (void)searchFor:(NSString *)query complete:(void (^)(NSArray<FlickrPhoto *> *))complete
++ (void)searchForCats:(void (^)(NSArray<FlickrPhoto *> *))complete
 {
     NSURL* queryURL =
     [NSURL URLWithString:
-     [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d37eb7252acea4a6c09a0614c1607748&tags=%@&has_geo=&extras=url_m&format=json&nojsoncallback=1", query]];
+     [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d37eb7252acea4a6c09a0614c1607748&tags=Cats&has_geo=&extras=url_m&format=json&nojsoncallback=1"]];
 
     NSURLSessionTask *task =
     [[NSURLSession sharedSession]

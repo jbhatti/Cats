@@ -9,6 +9,9 @@
 #import "ViewController.h"
 #import "FlickrAPI.h"
 #import "PhotoCollectionViewCell.h"
+#import "Constants.h"
+
+
 
 @interface ViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -32,7 +35,9 @@
     // and have a delegate method that would get the results (but that would mean
     // we couldn't just use a class method, would actually need to alloc&init a FlickrAPI object
     
-    [FlickrAPI searchFor:@"cats" complete:^(NSArray<FlickrPhoto *> *results) {
+    
+    
+    [FlickrAPI searchForCats:^(NSArray<FlickrPhoto *> *results) {
         self.catPhotos = results;
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -42,7 +47,49 @@
         NSLog(@"Loaded photo results");
     }];
     NSLog(@"View did load finished");
+    
 }
+
+
+
+- (NSURL *)createURLWithTag:(NSString *)value
+{
+    NSURLComponents *components = [NSURLComponents componentsWithString:kBaseURL];
+    components.query = kQueryItems;
+
+                                   
+    NSMutableArray <NSURLQueryItem *>*queryItems = [components.queryItems mutableCopy];
+    NSURLQueryItem *tag = [NSURLQueryItem queryItemWithName:@"tag" value:value];
+    [queryItems addObject:tag];
+    components.queryItems = [queryItems copy];
+    
+    return components.URL;
+}
+
+
+-(void)networkRequest {
+    //    NSURLRequest *urlRequest = [[NSURLRequest alloc]initWithURL:[self createNewUrl]];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    NSURL *url = [self createURLWithTag:@"cats"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request  completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+        // this is where we get the results
+        if (error != nil) {
+            NSLog(@"error in url session: %@", error.localizedDescription);
+            abort(); // TODO: display an alert or something
+        }
+        // TODO: check the response code we got; if it's >= 300 something is wrong
+        // remember to check status code, we need to cast response to a NSHTTPURLResponse
+        if (((NSHTTPURLResponse*)response).statusCode >= 300) {
+            NSLog(@"Unexpected http response: %@", response);
+            abort(); // TODO: display an alert or something
+        }                
+    }];
+    
+    [dataTask resume];
+}
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -61,8 +108,6 @@
     [cell setFlickrPhoto:self.catPhotos[indexPath.row]];
     return cell;
 }
-
-
 
 
 @end
