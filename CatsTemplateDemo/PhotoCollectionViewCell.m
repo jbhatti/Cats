@@ -20,23 +20,14 @@
 
 -(void)setFlickrPhoto:(FlickrPhoto *)flickrPhoto {
     _flickrPhoto = flickrPhoto;
-    
-        if (flickrPhoto.image) {
-            self.imageView.image = flickrPhoto.image;
-            self.labelView.text = flickrPhoto.title;
-        } else {
-            [FlickrAPI
-             loadImageForPhoto:flickrPhoto
-             complete:^(UIImage *result) {
-                 flickrPhoto.image = result;
-                 self.labelView.text = flickrPhoto.title;
+    [FlickrAPI loadImageForPhoto:flickrPhoto complete:^(UIImage *result) {
                  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                      self.imageView.image = result;
                      self.labelView.text = flickrPhoto.title;
                  }];
              }];
         }
-}
+
 
 
 @end

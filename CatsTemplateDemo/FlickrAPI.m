@@ -7,7 +7,7 @@
 //
 
 #import "FlickrAPI.h"
-#import "Secrets.h" // Create this file if you've cloned this repo
+//#import "Secrets.h" // Create this file if you've cloned this repo
 
 @implementation FlickrAPI
 
@@ -15,8 +15,7 @@
 {
     NSURL* queryURL =
     [NSURL URLWithString:
-     [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1&api_key=%@&tags=%@",
-      FLICKR_API_KEY, query]];
+     [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d37eb7252acea4a6c09a0614c1607748&tags=%@&has_geo=&format=json&nojsoncallback=1", query]];
 
     NSURLSessionTask *task =
     [[NSURLSession sharedSession]

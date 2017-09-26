@@ -13,6 +13,6 @@
 
 @property (nonatomic) FlickrPhoto* flickrPhoto;
 
--(void)setFlickrPhoto:(FlickrPhoto *)flickrPhoto;
+//-(void)setFlickrPhoto:(FlickrPhoto *)flickrPhoto;
 
 @end
