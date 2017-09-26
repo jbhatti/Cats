@@ -15,7 +15,7 @@
 {
     NSURL* queryURL =
     [NSURL URLWithString:
-     [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d37eb7252acea4a6c09a0614c1607748&tags=%@&has_geo=&format=json&nojsoncallback=1", query]];
+     [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d37eb7252acea4a6c09a0614c1607748&tags=%@&has_geo=1&extras=url_m&format=json&nojsoncallback=1", query]];
 
     NSURLSessionTask *task =
     [[NSURLSession sharedSession]
