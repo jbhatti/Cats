@@ -8,6 +8,12 @@
 
 #import "FlickrPhoto.h"
 
+
+
+@interface FlickrPhoto ()<MKAnnotation>
+
+@end
+
 @implementation FlickrPhoto
 
 - (instancetype)initWithInfo:(NSDictionary<NSString *,id> *)info
@@ -21,6 +27,7 @@
         _title = info[@"title"];
         //_farm = [info[@"farm"] integerValue];
         _imageUrl = info[@"url_m"];
+        _coordinate = CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue]);
         
     }
     return self;
@@ -31,6 +38,10 @@
     //return self.imageUrl;
     return [NSURL URLWithString:
             [NSString stringWithFormat:@"%@", self.imageUrl]];
+    
+}
+
+- (void)fetchImageCoordinates {
     
 }
 

@@ -10,7 +10,8 @@
 #define Constants_h
 
 #define kBaseURL @"https://api.flickr.com/services/rest"
-#define kQueryItems @"method=flickr.photos.search&api_key=d37eb7252acea4a6c09a0614c1607748&has_geo=&extras=url_m&format=json&nojsoncallback=1"
+
+#define kQueryItems @"?method=flickr.photos.search&api_key=7c7a2411a0764d895162a1d6d5970ead&tags=cats&has_geo=1&extras=geo%2C+url_m&format=json&nojsoncallback=1"
 
 
 #endif /* Constants_h */
